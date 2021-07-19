@@ -320,9 +320,9 @@ void FPSciLogger::loggerThreadEntry()
 		users.swap(m_users, users);
 		m_users.reserve(users.size() * 2);
 
-		decltype(m_userLookingAtTarget) userLookingAtTargets;
-		userLookingAtTargets.swap(m_userLookingAtTarget, userLookingAtTargets);
-		userLookingAtTargets.reserve(userLookingAtTargets.size() * 2);
+		decltype(m_playerLookingAtTarget) playerLookingAtTargets;
+		playerLookingAtTargets.swap(m_playerLookingAtTarget, playerLookingAtTargets);
+		playerLookingAtTargets.reserve(playerLookingAtTargets.size() * 2);
 
 		// Unlock all the now-empty queues and write out our temporary copies
 		lk.unlock();
@@ -330,6 +330,7 @@ void FPSciLogger::loggerThreadEntry()
 		recordFrameInfo(frameInfo);
 		recordPlayerActions(playerActions);
 		recordTargetLocations(targetLocations);
+		recordPlayerLookingAtTargets(playerLookingAtTargets);
 
 		insertRowsIntoDB(m_db, "Questions", questions);
 		insertRowsIntoDB(m_db, "Targets", targets);
