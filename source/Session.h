@@ -126,9 +126,9 @@ struct PlayerLookingAtTarget {
 
 	PlayerLookingAtTarget() {};
 
-	PlayerLookingAtTarget(FILETIME t, String targetName) {
+	PlayerLookingAtTarget(FILETIME t, String name) {
 		time = t;
-		targetName = targetName;
+		targetName = name;
 	}
 };
 

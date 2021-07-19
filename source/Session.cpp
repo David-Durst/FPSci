@@ -506,6 +506,7 @@ void Session::onSimulation(RealTime rdt, SimTime sdt, SimTime idt)
 	{
 		accumulateTrajectories();
 		accumulateFrameInfo(rdt, sdt, idt);
+		accumulatePlayerLookingAtTarget();
 	}
 }
 
