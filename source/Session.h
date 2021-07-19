@@ -395,6 +395,7 @@ public:
 	void recordTrialResponse(int destroyedTargets, int totalTargets);
 	void accumulateTrajectories();
 	void accumulateFrameInfo(RealTime rdt, float sdt, float idt);
+	void accumulatePlayerLookingAtTarget();
 
 	void countDestroy() {
 		m_destroyedTargets++;

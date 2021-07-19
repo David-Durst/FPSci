@@ -238,6 +238,7 @@ public:
 	bool enable = true;		///< High-level logging enable flag (if false no output is created)							
 	bool logTargetTrajectories = true;		///< Log target trajectories in table?
 	bool logFrameInfo = true;		///< Log frame info in table?
+	bool logPlayerLookingAtTarget = true; ///< Log when player looks at target (even through wall) in table?
 	bool logPlayerActions = true;		///< Log player actions in table?
 	bool logTrialResponse = true;		///< Log trial response in table?
 	bool logUsers = true;		///< Log user information in table?

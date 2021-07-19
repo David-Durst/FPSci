@@ -562,6 +562,25 @@ void Session::accumulatePlayerAction(PlayerActionType action, String targetName)
 	if (action == PlayerActionType::Hit || action == PlayerActionType::Destroy) { m_hitCount++; }
 }
 
+void Session::accumulatePlayerLookingAtTarget()
+{
+	if (notNull(logger) && m_config->logger.logPlayerLookingAtTarget) {
+		Point3 playerView = m_camera->frame().lookVector();
+		Point3 playerLoc = getPlayerLocation();
+		Ray playerRay = Ray::fromOriginAndDirection(playerLoc, playerView);
+		for (shared_ptr<TargetEntity> target : m_targetArray) {
+			if (!target->isLogged()) continue;
+			float closest = finf();
+			if (target->intersect(playerRay, closest)) {
+				PlayerLookingAtTarget playerLookingAtTarget = PlayerLookingAtTarget(FPSciLogger::getFileTime(), target->name());
+				logger->logPlayerLookingAtTarget(playerLookingAtTarget);
+			}
+		}
+	}
+	// recording view direction trajectories
+	accumulatePlayerAction(PlayerActionType::Aim);
+}
+
 void Session::accumulateFrameInfo(RealTime t, float sdt, float idt) {
 	if (notNull(logger) && m_config->logger.logFrameInfo) {
 		logger->logFrameInfo(FrameInfo(FPSciLogger::getFileTime(), sdt));

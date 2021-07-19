@@ -114,6 +114,7 @@ public:
 	void logPlayerAction(const PlayerAction& playerAction) { addToQueue(m_playerActions, playerAction); }
 	void logQuestionResult(const QuestionResult& questionResult) { addToQueue(m_questions, questionResult); }
 	void logTargetLocation(const TargetLocation& targetLocation) { addToQueue(m_targetLocations, targetLocation); }
+	void logPlayerLookingAtTarget(const PlayerLookingAtTarget& playerLookingAtTarget) { addToQueue(m_playerLookingAtTarget, playerLookingAtTarget); }
 	void logTargetInfo(const TargetInfo& targetInfo) { addToQueue(m_targets, targetInfo); }
 	void logTrial(const TrialValues& trial) { addToQueue(m_trials, trial); }
 
