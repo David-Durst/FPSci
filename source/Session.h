@@ -120,6 +120,18 @@ public:
 	Any toAny(const bool forceAll = true) const;
 };
 
+struct PlayerLookingAtTarget {
+	FILETIME time;
+	String targetName = "";
+
+	PlayerLookingAtTarget() {};
+
+	PlayerLookingAtTarget(FILETIME t, String targetName) {
+		time = t;
+		targetName = targetName;
+	}
+};
+
 /** Configuration for a session worth of trials */
 class SessionConfig : public FpsConfig {
 public:

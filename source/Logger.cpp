@@ -135,6 +135,13 @@ void FPSciLogger::openResultsFile(const String& filename,
 		};
 		createTableInDB(m_db, "Player_Action", viewTrajectoryColumns);
 
+		// Player_Action table
+		Columns playerLookingAtTargetColumns = {
+				{ "time", "text" },
+				{ "target_name", "text" },
+		};
+		createTableInDB(m_db, "Player_Looking_At_Target", playerLookingAtTargetColumns);
+
 		// Frame_Info table
 		Columns frameInfoColumns = {
 				{"time", "text"},
@@ -261,6 +268,18 @@ void FPSciLogger::recordTargetLocations(const Array<TargetLocation>& locations) 
 	insertRowsIntoDB(m_db, "Target_Trajectory", rows);
 }
 
+void FPSciLogger::recordPlayerLookingAtTargets(const Array<PlayerLookingAtTarget>& playerLookingAtTargets) {
+	Array<RowEntry> rows;
+	for (const auto& playerLookingAtTarget : playerLookingAtTargets) {
+		Array<String> playerLookingAtTargetValues = {
+			"'" + FPSciLogger::formatFileTime(playerLookingAtTarget.time) + "'",
+			"'" + playerLookingAtTarget.targetName + "'",
+		};
+		rows.append(playerLookingAtTargetValues);
+	}
+	insertRowsIntoDB(m_db, "Player_Looking_At_Target", rows);
+}
+
 void FPSciLogger::loggerThreadEntry()
 {
 	std::unique_lock<std::mutex> lk(m_queueMutex);
@@ -300,6 +319,10 @@ void FPSciLogger::loggerThreadEntry()
 		decltype(m_users) users;
 		users.swap(m_users, users);
 		m_users.reserve(users.size() * 2);
+
+		decltype(m_userLookingAtTarget) userLookingAtTargets;
+		userLookingAtTargets.swap(m_userLookingAtTarget, userLookingAtTargets);
+		userLookingAtTargets.reserve(userLookingAtTargets.size() * 2);
 
 		// Unlock all the now-empty queues and write out our temporary copies
 		lk.unlock();

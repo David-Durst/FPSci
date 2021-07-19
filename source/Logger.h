@@ -46,6 +46,7 @@ protected:
 	Array<TargetInfo> m_targets;
 	Array<TrialValues> m_trials;						///< Trial ID, start/end time etc.
 	Array<UserValues> m_users;
+	Array<PlayerLookingAtTarget> m_playerLookingAtTarget;
 
 	size_t getTotalQueueBytes()
 	{
@@ -81,6 +82,9 @@ protected:
 
 	/** Record an array of target locations */
 	void recordTargetLocations(const Array<TargetLocation>& locations);
+
+	/** Record an array of players looking at targets*/
+	void recordPlayerLookingAtTargets(const Array<PlayerLookingAtTarget>& playerLookingAtTargets);
 
 	/** Create a results file */
 	void openResultsFile(const String& filename, 
