@@ -5,7 +5,7 @@
         resetHeight = -5.5; 
         playerCamera = "";
         spawnPosition = Point3(50.9, -2.5, -5.5);
-        spawnHeading = 3.0;
+        spawnHeading = 1.5;
     }; 
     moveRate = 3.5;
 

@@ -139,6 +139,7 @@ void FPSciLogger::openResultsFile(const String& filename,
 		Columns playerLookingAtTargetColumns = {
 				{ "time", "text" },
 				{ "target_name", "text" },
+				{ "visible", "integer" }
 		};
 		createTableInDB(m_db, "Player_Looking_At_Target", playerLookingAtTargetColumns);
 
@@ -271,9 +272,11 @@ void FPSciLogger::recordTargetLocations(const Array<TargetLocation>& locations) 
 void FPSciLogger::recordPlayerLookingAtTargets(const Array<PlayerLookingAtTarget>& playerLookingAtTargets) {
 	Array<RowEntry> rows;
 	for (const auto& playerLookingAtTarget : playerLookingAtTargets) {
+		String visibleString = playerLookingAtTarget.visible ? "1" : "0";
 		Array<String> playerLookingAtTargetValues = {
 			"'" + FPSciLogger::formatFileTime(playerLookingAtTarget.time) + "'",
 			"'" + playerLookingAtTarget.targetName + "'",
+			"'" + visibleString + "'",
 		};
 		rows.append(playerLookingAtTargetValues);
 	}

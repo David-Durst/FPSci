@@ -123,12 +123,14 @@ public:
 struct PlayerLookingAtTarget {
 	FILETIME time;
 	String targetName = "";
+	bool visible = false;
 
 	PlayerLookingAtTarget() {};
 
-	PlayerLookingAtTarget(FILETIME t, String name) {
+	PlayerLookingAtTarget(FILETIME t, String name, bool visible) {
 		time = t;
 		targetName = name;
+		this->visible = visible;
 	}
 };
 

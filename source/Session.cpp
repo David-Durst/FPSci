@@ -571,9 +571,11 @@ void Session::accumulatePlayerLookingAtTarget()
 		Ray playerRay = Ray::fromOriginAndDirection(playerLoc, playerView);
 		for (shared_ptr<TargetEntity> target : m_targetArray) {
 			if (!target->isLogged()) continue;
-			float closest = finf();
-			if (target->intersect(playerRay, closest)) {
-				PlayerLookingAtTarget playerLookingAtTarget = PlayerLookingAtTarget(FPSciLogger::getFileTime(), target->name());
+			float closestTarget = finf();
+			if (target->intersect(playerRay, closestTarget)) {
+				float closestScene = finf();
+				shared_ptr<Entity> closestEntity = m_scene->intersect(playerRay, closestScene);
+				PlayerLookingAtTarget playerLookingAtTarget = PlayerLookingAtTarget(FPSciLogger::getFileTime(), target->name(), target == closestEntity);
 				logger->logPlayerLookingAtTarget(playerLookingAtTarget);
 			}
 		}
