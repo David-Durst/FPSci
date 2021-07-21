@@ -1,0 +1,11 @@
+{ 
+    settingsVersion = 1; 
+    users = ( 
+        { 
+            id = "anon"; 
+            mouseDPI = 800; 
+            mouseDegPerMillimeter = 2.82; 
+            reticleChangeTime = 0.3; 
+        } ); 
+    
+} 

@@ -1,0 +1,12 @@
+{ 
+    currentUser = "anon"; 
+    sessions = ( ); 
+    settingsVersion = 1; 
+    users = ( 
+        { 
+            completedSessions = ( "60Hz"); 
+            id = "anon"; 
+            sessions = ( "60Hz", "30Hz"); 
+        } ); 
+    
+} 
